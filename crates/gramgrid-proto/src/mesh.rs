@@ -13,6 +13,7 @@ pub enum MeshOp {
     MoeDispatch = 2,
     AgentHandoff = 3,
     VerifyChallenge = 4,
+    ModelQuery = 5,
 }
 
 #[repr(u16)]
@@ -104,6 +105,9 @@ impl MeshEnvelope {
         if self.payload.is_empty() || self.payload.len() > MAX_PAYLOAD_BYTES {
             return Err("GG02 payload exceeds contract");
         }
+        if self.op == MeshOp::ModelQuery && (self.total_steps != 1 || self.step != 0) {
+            return Err("whole model queries have exactly one service step");
+        }
         match self.op {
             MeshOp::StageForward | MeshOp::MoeDispatch => {
                 if self.layer_start >= self.layer_end || self.hidden_dim == 0 || self.seq_len == 0 {
@@ -120,7 +124,7 @@ impl MeshEnvelope {
                     return Err("GG02 tensor byte count disagrees with dtype and shape");
                 }
             }
-            MeshOp::AgentHandoff | MeshOp::VerifyChallenge => {
+            MeshOp::AgentHandoff | MeshOp::VerifyChallenge | MeshOp::ModelQuery => {
                 if self.dtype != MeshDType::Opaque || self.hidden_dim != 0 || self.seq_len != 0
                     || self.layer_start != 0 || self.layer_end != 0 {
                     return Err("opaque state is not a tensor layer");
@@ -178,6 +182,7 @@ impl MeshEnvelope {
             2 => MeshOp::MoeDispatch,
             3 => MeshOp::AgentHandoff,
             4 => MeshOp::VerifyChallenge,
+            5 => MeshOp::ModelQuery,
             _ => return Err("unsupported GG02 opcode"),
         };
         let dtype = match u16_at(bytes, 52) {

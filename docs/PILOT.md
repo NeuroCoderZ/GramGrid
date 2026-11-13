@@ -22,7 +22,7 @@
 
 ## 2026-11-14 01:08 MSK — Воспроизведение на подготовленном AMD-узле
 
-2026-11-14 01:08 MSK — До загрузки проверить память и диск; не вытеснять чужую модель. Регистрация: LEMONADE_API_KEY=local lemonade pull user.GramGrid-Qwen35-08B-NPU --checkpoint main qwen3.5:0.8b --recipe flm --label chat. Затем LEMONADE_API_KEY=local lemonade load user.GramGrid-Qwen35-08B-NPU --ctx-size 4096 --no-merge-args. Эти команды используют уже установленный Lemonade/FLM и не меняют драйверы.
+2026-11-14 02:11 MSK — До загрузки проверить память и диск; не вытеснять чужую модель. Регистрация: LEMONADE_API_KEY=local lemonade pull user.GramGrid-Qwen35-08B-NPU --checkpoint main qwen3.5:0.8b --recipe flm --label chat. Затем LEMONADE_API_KEY=local lemonade load user.GramGrid-Qwen35-08B-NPU --ctx-size 4096 --no-merge-args --save-options. Эти команды используют уже установленный Lemonade/FLM и не меняют драйверы.
 
 2026-11-14 01:08 MSK — Проверки: python3 scripts/test_npu_llm_pilot.py; для живого опыта GRAMGRID_LIVE_NPU_PILOT=1 python3 scripts/test_npu_llm_pilot.py. Запрос: python3 scripts/npu_llm_pilot.py --max-tokens 128 --prompt 'Напиши только код Python функции sum_even(nums), возвращающей сумму чётных чисел списка. Без объяснений.'. Не экстраполировать короткий запрос на миллиард узлов.
 
