@@ -1,0 +1,8 @@
+{
+  "code_cases_passed": 5,
+  "xdna_interrupts_before": 5024,
+  "xdna_interrupts_after": 5283,
+  "xdna_interrupt_delta": 259,
+  "single_flm_npu2_runtime": true,
+  "scope": "NPU activity plus native runtime provenance, not per-operator cryptographic attestation"
+}

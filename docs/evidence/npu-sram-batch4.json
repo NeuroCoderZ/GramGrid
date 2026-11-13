@@ -1,0 +1,19 @@
+{
+  "device": "RyzenAI-npu6",
+  "passed": true,
+  "scope": "weights held on chip across four iterations of one NPU kernel invocation",
+  "matrices_per_call": 4,
+  "kernel_calls": 3,
+  "elements_checked_per_call": 1024,
+  "weight_tile_bytes": 1024,
+  "host_input_bytes": 4096,
+  "host_output_bytes": 4096,
+  "host_DDR_still_used": true,
+  "per_call_elapsed_ns": [
+    388633,
+    215466,
+    207281
+  ],
+  "measured_hardware_DDR_traffic_bytes": null,
+  "no_claim_of_SRAM_persistence_across_kernel_reset": true
+}

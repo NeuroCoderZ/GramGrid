@@ -1,0 +1,11 @@
+[package]
+name = "gramgrid-node"
+version.workspace = true
+edition.workspace = true
+build = "build.rs"
+
+[dependencies]
+gramgrid-proto = { path = "../gramgrid-proto" }
+gramgrid-scheduler = { path = "../gramgrid-scheduler" }
+tungstenite = "=0.29.0"
+serde_json = "1"

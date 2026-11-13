@@ -1,0 +1,69 @@
+# Секреты и локальные настройки
+.env
+.env.*
+!.env.example
+!.env.*.example
+*.pem
+*.key
+
+# Зависимости и окружения
+node_modules/
+.venv/
+venv/
+
+# Результаты сборки и временные файлы
+/dist/
+/build/
+/target/
+/toolchains/
+/native/xdna/build/
+/client-tma/assets/
+/cache/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+coverage/
+*.log
+*.tmp
+
+# Локальные данные и веса моделей
+*.db
+*.db-*
+*.sqlite
+*.sqlite-*
+*.sqlite3
+*.sqlite3-*
+*.gguf
+*.onnx
+*.safetensors
+*.pt
+*.pth
+/models/
+/backups/
+*.q4nx
+*.xclbin
+*.insts.bin
+*.so
+*.spk
+*.wav
+
+# Частные журналы, исследования и публикационные квитанции
+/.hermes/
+/PROGRESS.md
+/repomix-output.txt
+/docs/plan-state.json
+/docs/INFRASTRUCTURE.md
+/docs/research/
+/docs/publication-local.json
+/docs/evidence/agentmind-registration.json
+
+# Генерируемые индексы кода
+.codegraph/
+graphify-out/
+
+# Файлы операционной системы
+.DS_Store
+Thumbs.db

@@ -1,0 +1,23 @@
+{
+  "observed_at_msk": "2026-11-14 00:43 MSK",
+  "scenario_not_measurement": true,
+  "devices": 1000000000,
+  "rated_tops_per_device_assumption": 40,
+  "rated_integer_ops_per_second": 40000000000000000000000,
+  "rated_ZOPS": 40.0,
+  "allocated_GiB_per_device_assumption": 1,
+  "aggregate_capacity_bytes": 1073741824000000000,
+  "aggregate_decimal_EB": 1.073741824,
+  "usable_tps": null,
+  "quality_comparison_to_closed_models": null,
+  "same_weights_same_model": true,
+  "does_not_create_unified_memory": true,
+  "power_example_W_per_device_assumption": 1,
+  "power_example_total_GW": 1.0,
+  "limits": [
+    "Peak INT8 TOPS is not measured LLM throughput.",
+    "NPU, RAM and radios consume energy; 1 W is illustrative, not a device measurement.",
+    "Replication changes aggregate independent request capacity, not parameters or intelligence.",
+    "Layer sharding depends on availability, topology, per-hop latency, recurrent/KV state and model-specific NPU operators."
+  ]
+}

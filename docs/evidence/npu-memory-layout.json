@@ -1,0 +1,40 @@
+{
+  "source": "installed MLIR-AIE target-model API",
+  "targets": [
+    {
+      "target": "npu2",
+      "columns": 8,
+      "rows": 6,
+      "compute_tiles": 32,
+      "memory_tiles": 8,
+      "data_bytes_per_compute_tile": 65536,
+      "data_bytes_per_memory_tile": 524288,
+      "aggregate_data_bytes": 6291456,
+      "aggregate_data_MiB": 6.0,
+      "capacity_kind": "compiler architecture data-memory definition",
+      "measured_free_hardware_bytes": null
+    },
+    {
+      "target": "npu2_1col",
+      "columns": 1,
+      "rows": 6,
+      "compute_tiles": 4,
+      "memory_tiles": 1,
+      "data_bytes_per_compute_tile": 65536,
+      "data_bytes_per_memory_tile": 524288,
+      "aggregate_data_bytes": 786432,
+      "aggregate_data_MiB": 0.75,
+      "capacity_kind": "compiler architecture data-memory definition",
+      "measured_free_hardware_bytes": null
+    }
+  ],
+  "important": [
+    "Tile memories are distributed, not one flat freely allocatable heap.",
+    "Capacity is not the usable/free budget of a running graph or another device.",
+    "Data SRAM excludes separate program memory and registers.",
+    "HOST_ONLY buffers in the current GramGrid adapter are host-memory buffers, not on-chip SRAM.",
+    "Current pipeline fills matrix_b for every run; it does not prove persistent SRAM weights."
+  ],
+  "current_i32_tensor_bytes": 1024,
+  "three_tensor_bytes_without_fifo_replication_or_other_overheads": 3072
+}

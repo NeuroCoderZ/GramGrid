@@ -1,0 +1,78 @@
+{
+  "observed_at_msk": "2026-11-14 00:43 MSK",
+  "base_model": "Qwen/Qwen3.5-0.8B",
+  "model_license": "Apache-2.0",
+  "gguf": {
+    "repo": "unsloth/Qwen3.5-0.8B-GGUF",
+    "revision": "6ab461498e2023f6e3c1baea90a8f0fe38ab64d0",
+    "file": "Qwen3.5-0.8B-Q4_K_M.gguf",
+    "bytes": 532517120,
+    "MiB": 507.847900390625,
+    "sha256": "bd258782e35f7f458f8aced1adc053e6e92e89bc735ba3be89d38a06121dc517"
+  },
+  "npu_package": {
+    "repo": "FastFlowLM/Qwen3.5-0.8B-NPU2",
+    "revision": "1d16e5eaa2508889fb88eb1bfab1921a30a1a466",
+    "tag": "qwen3.5:0.8b",
+    "format": "q4nx / NPU2",
+    "files": [
+      {
+        "name": ".gitattributes",
+        "bytes": 1671,
+        "sha256": null
+      },
+      {
+        "name": "README.md",
+        "bytes": 61705,
+        "sha256": null
+      },
+      {
+        "name": "chat_template.jinja",
+        "bytes": 7545,
+        "sha256": null
+      },
+      {
+        "name": "config.json",
+        "bytes": 3098,
+        "sha256": null
+      },
+      {
+        "name": "model.q4nx",
+        "bytes": 560985936,
+        "sha256": "787428ffe87be5e3e5a8fcaf241844b69896ca0c74a41f2432c436739f7ba4e4"
+      },
+      {
+        "name": "tokenizer.json",
+        "bytes": 12807982,
+        "sha256": "5f9e4d4901a92b997e463c1f46055088b6cca5ca61a6522d1b9f64c4bb81cb42"
+      },
+      {
+        "name": "tokenizer_config.json",
+        "bytes": 16788,
+        "sha256": "485aad30cae5f2280d6050a01f9160c435ee5aeabaf4fda7dd59b76ccc8b1f4c"
+      },
+      {
+        "name": "vision_weight.q4nx",
+        "bytes": 201202552,
+        "sha256": "94e6b19043bf1d07645ee1e0a44b44016abb881801027b39656b7f7872f8fc18"
+      }
+    ],
+    "total_bytes": 775087277
+  },
+  "context": 4096,
+  "text_layers": 24,
+  "full_attention_layers": 6,
+  "linear_attention_layers": 18,
+  "bf16_kv_formula_bytes": 50331648,
+  "fp32_recurrent_matrix_formula_bytes": 18874368,
+  "formula_scope": "Architecture estimate only: excludes convolution state, MTP, padding, scratch, runtime, token buffers; not a measured RAM requirement.",
+  "minimum_devices_for_local_model_capacity": 1,
+  "minimum_physical_devices_for_network_validation": 2,
+  "universal_npu_support_verified": false,
+  "sources": [
+    "https://huggingface.co/Qwen/Qwen3.5-0.8B",
+    "https://huggingface.co/unsloth/Qwen3.5-0.8B-GGUF",
+    "https://huggingface.co/FastFlowLM/Qwen3.5-0.8B-NPU2/tree/flm_q4k_high_precision",
+    "https://raw.githubusercontent.com/ROCm/FastFlowLM/main/src/model_list.json"
+  ]
+}
