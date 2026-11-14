@@ -5,6 +5,7 @@
   "declared_model_revision": "1d16e5eaa2508889fb88eb1bfab1921a30a1a466",
   "foreign_revision_refused": true,
   "foreign_session_refused": true,
+  "journal_enabled": false,
   "model": "user.GramGrid-Qwen35-08B-NPU",
   "model_calls": 1,
   "model_layer_sharding": false,
@@ -16,21 +17,22 @@
   "replay_model_calls": 0,
   "replay_same_response": true,
   "request_bytes": 327,
-  "response_bytes": 958,
+  "response_bytes": 959,
+  "response_digest": "f80a5bc1a07ce4dedeec2cced1cc82bd4a4e8858845379bf1586217c0d3880a9",
   "text": "def sum_even(nums):\n    return sum(x for x in nums if x % 2 == 0)",
   "usage": {
     "completion_tokens": 24,
-    "decoding_duration": 0.488799,
-    "decoding_speed_tps": 49.09993678383139,
+    "decoding_duration": 0.489848,
+    "decoding_speed_tps": 48.99479022063987,
     "kv_token_occupancy_rate_percentage": 1.416015625,
-    "load_duration": 5.31e-07,
-    "prefill_duration_ttft": 0.478681216,
-    "prefill_speed_tps": 71.02848171924089,
+    "load_duration": 5.91e-07,
+    "prefill_duration_ttft": 0.314225664,
+    "prefill_speed_tps": 108.20249233366246,
     "prompt_tokens": 34,
     "prompt_tokens_details": {
       "cached_tokens": 0
     },
     "total_tokens": 58
   },
-  "wall_seconds": 1.111483422
+  "wall_seconds": 0.924815907
 }

@@ -1,0 +1,79 @@
+{
+  "first": {
+    "changed_input_refused": true,
+    "checkpoint": "qwen3.5:0.8b",
+    "cryptographic_peer_attestation": false,
+    "declared_model_revision": "1d16e5eaa2508889fb88eb1bfab1921a30a1a466",
+    "foreign_revision_refused": true,
+    "foreign_session_refused": true,
+    "journal_enabled": true,
+    "model": "user.GramGrid-Qwen35-08B-NPU",
+    "model_calls": 1,
+    "model_layer_sharding": false,
+    "persistent_replay_after_restart": false,
+    "physical_npu_devices": 1,
+    "public_listener": false,
+    "recipe": "flm",
+    "refused_requests": 3,
+    "replay_model_calls": 0,
+    "replay_same_response": true,
+    "request_bytes": 327,
+    "response_bytes": 956,
+    "response_digest": "c2488da0d849c914c3193dc7d776669af7a488768c1e5c48b011722181848dda",
+    "text": "def sum_even(nums):\n    return sum(x for x in nums if x % 2 == 0)",
+    "usage": {
+      "completion_tokens": 24,
+      "decoding_duration": 0.484462,
+      "decoding_speed_tps": 49.53948916530089,
+      "kv_token_occupancy_rate_percentage": 1.416015625,
+      "load_duration": 5.51e-07,
+      "prefill_duration_ttft": 0.443644512,
+      "prefill_speed_tps": 76.63793663698019,
+      "prompt_tokens": 34,
+      "prompt_tokens_details": {
+        "cached_tokens": 0
+      },
+      "total_tokens": 58
+    },
+    "wall_seconds": 1.064227906
+  },
+  "after_restart": {
+    "changed_input_refused": true,
+    "checkpoint": "qwen3.5:0.8b",
+    "cryptographic_peer_attestation": false,
+    "declared_model_revision": "1d16e5eaa2508889fb88eb1bfab1921a30a1a466",
+    "foreign_revision_refused": true,
+    "foreign_session_refused": true,
+    "journal_enabled": true,
+    "model": "user.GramGrid-Qwen35-08B-NPU",
+    "model_calls": 0,
+    "model_layer_sharding": false,
+    "persistent_replay_after_restart": true,
+    "physical_npu_devices": 1,
+    "public_listener": false,
+    "recipe": "flm",
+    "refused_requests": 3,
+    "replay_model_calls": 0,
+    "replay_same_response": true,
+    "request_bytes": 327,
+    "response_bytes": 956,
+    "response_digest": "c2488da0d849c914c3193dc7d776669af7a488768c1e5c48b011722181848dda",
+    "text": "def sum_even(nums):\n    return sum(x for x in nums if x % 2 == 0)",
+    "usage": {
+      "completion_tokens": 24,
+      "decoding_duration": 0.484462,
+      "decoding_speed_tps": 49.53948916530089,
+      "kv_token_occupancy_rate_percentage": 1.416015625,
+      "load_duration": 5.51e-07,
+      "prefill_duration_ttft": 0.443644512,
+      "prefill_speed_tps": 76.63793663698019,
+      "prompt_tokens": 34,
+      "prompt_tokens_details": {
+        "cached_tokens": 0
+      },
+      "total_tokens": 58
+    },
+    "wall_seconds": 0.000589872
+  },
+  "fixture_owner": "GramGrid test; managed scratch TTL"
+}

@@ -59,6 +59,10 @@ coverage/
 /docs/research/
 /docs/publication-local.json
 /docs/evidence/agentmind-registration.json
+/.state/
+*.request.gg02
+*.result.gg02
+*.pending.gg02
 
 # Генерируемые индексы кода
 .codegraph/
