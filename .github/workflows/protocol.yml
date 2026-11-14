@@ -14,5 +14,7 @@ jobs:
       - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6
       - name: Rust protocol and router tests, not NPU inference
         run: TMPDIR="$RUNNER_TEMP" cargo test -p gramgrid-proto -p gramgrid-scheduler --lib --tests
+      - name: Standalone GG02 client policy, no model invocation
+        run: TMPDIR="$RUNNER_TEMP" cargo test -p gramgrid-scheduler --example model_query_client
       - name: NPU-only client policy, hardware test skipped
         run: TMPDIR="$RUNNER_TEMP" python3 scripts/test_npu_llm_pilot.py

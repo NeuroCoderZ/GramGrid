@@ -1,0 +1,41 @@
+{
+  "first_server": {
+    "model_calls": 1,
+    "refused_requests": 0,
+    "server_pid": 2307074,
+    "stopped": true
+  },
+  "after_restart": {
+    "model_calls": 0,
+    "refused_requests": 0,
+    "server_pid": 2307505,
+    "stopped": true
+  },
+  "client_pids": [
+    2307076,
+    2307504,
+    2307507
+  ],
+  "text": "ДА",
+  "checkpoint": "qwen3.5:0.8b",
+  "recipe": "flm",
+  "usage": {
+    "completion_tokens": 2,
+    "decoding_duration": 0.074461,
+    "decoding_speed_tps": 26.859698365587356,
+    "kv_token_occupancy_rate_percentage": 0.4638671875,
+    "load_duration": 4.51e-07,
+    "prefill_duration_ttft": 0.329682912,
+    "prefill_speed_tps": 51.56469862775296,
+    "prompt_tokens": 17,
+    "prompt_tokens_details": {
+      "cached_tokens": 0
+    },
+    "total_tokens": 19
+  },
+  "same_saved_receipt": true,
+  "physical_npu_devices": 1,
+  "public_listener": false,
+  "model_layer_sharding": false,
+  "fixture_owner": "GramGrid; managed scratch retention"
+}

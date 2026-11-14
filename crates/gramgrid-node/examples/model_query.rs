@@ -1,9 +1,9 @@
 //! GG02 whole-model job service: one local FLM NPU2 model, not layer sharding.
-//! Loopback, owner consent and bounded in-memory replay only; no public trust.
+//! Loopback и согласие владельца; --serve требует приватный журнал, публичное доверие не заявлено.
 use gramgrid_proto::mesh::{MeshDType, MeshEnvelope, MeshOp, RESULT_FLAG};
 use gramgrid_scheduler::model_journal::{JournalClaim, ModelJournal};
 use serde_json::{Value, json};
-use std::{collections::BTreeMap, io::{Read, Write}, net::{SocketAddr, TcpListener, TcpStream},
+use std::{collections::BTreeMap, io::{BufRead, Read, Write}, net::{SocketAddr, TcpListener, TcpStream},
     path::PathBuf, process::Command, sync::{Arc, atomic::{AtomicBool, Ordering}},
     thread, time::{Duration, Instant}};
 
@@ -107,12 +107,15 @@ fn rpc(address: SocketAddr, request: &MeshEnvelope) -> Result<MeshEnvelope, Erro
 }
 
 fn run() -> Result<(), Error> {
-    let args: Vec<String> = std::env::args().skip(1).collect();
+    let original: Vec<String> = std::env::args().skip(1).collect();
+    let serve = original.iter().any(|arg| arg == "--serve");
+    let args: Vec<String> = original.into_iter().filter(|arg| arg != "--serve").collect();
     let state_dir = match args.as_slice() {
         [consent] if consent == "--consent" => None,
         [consent, option, path] if consent == "--consent" && option == "--state-dir" => Some(PathBuf::from(path)),
         _ => return Err("explicit --consent and optional --state-dir PATH are required".into()),
     };
+    if serve && state_dir.is_none() { return Err("--serve requires --state-dir".into()); }
     let root = PathBuf::from(env!("CARGO_MANIFEST_DIR")).join("../..");
     let manifest: Value = serde_json::from_slice(&std::fs::read(root.join("docs/evidence/qwen08-model-budget.json")).map_err(|e| e.to_string())?).map_err(|e| e.to_string())?;
     let revision = manifest["npu_package"]["revision"].as_str().ok_or("declared model revision is missing")?.to_string();
@@ -128,6 +131,13 @@ fn run() -> Result<(), Error> {
     listener.set_nonblocking(true).map_err(|e| e.to_string())?;
     let stop = Arc::new(AtomicBool::new(false));
     let stopping = stop.clone();
+    if serve {
+        let ready = json!({"listen":address.to_string(),"session_tag":session,
+            "model_revision":revision,"model":MODEL,"journal_enabled":state_dir.is_some(),
+            "public_listener":false,"protocol":"GG02","server_pid":std::process::id()});
+        writeln!(std::io::stdout(), "{ready}").map_err(|e| e.to_string())?;
+        std::io::stdout().flush().map_err(|e| e.to_string())?;
+    }
     let thread = thread::spawn(move || {
         let mut worker = Worker { cache: BTreeMap::new(), calls: 0, refused: 0 };
         while !stopping.load(Ordering::Acquire) {
@@ -157,6 +167,25 @@ fn run() -> Result<(), Error> {
         }
         worker
     });
+    if serve {
+        let control = (|| -> Result<(), Error> {
+            let stdin = std::io::stdin();
+            let mut input = stdin.lock();
+            loop {
+                let mut line = Vec::new();
+                let n = (&mut input).take(64).read_until(b'\n', &mut line).map_err(|e| e.to_string())?;
+                if n == 0 || line == b"stop\n" || line == b"stop\r\n" { break; }
+                if line.len() >= 64 { return Err("control input exceeds its budget".into()); }
+            }
+            Ok(())
+        })();
+        stop.store(true, Ordering::Release);
+        let worker = thread.join().map_err(|_| "model worker panicked")?;
+        control?;
+        println!("{}", json!({"model_calls":worker.calls,"refused_requests":worker.refused,
+            "server_pid":std::process::id(),"stopped":true}));
+        return Ok(());
+    }
     let result = (|| -> Result<Value, Error> {
         let request = MeshEnvelope { task_id: 1, op: MeshOp::ModelQuery, step: 0, total_steps: 1,
             layer_start: 0, layer_end: 0, hidden_dim: 0, seq_len: 0, sender_hash: 1, target_hash: 2,
