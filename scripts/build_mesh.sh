@@ -6,7 +6,10 @@ python3 - <<'PY'
 import os
 from pathlib import Path
 root = Path.cwd()
-tmp = Path(os.environ.get("TMPDIR", "/home/neurocoderz/.hermes/cache/scratch"))
+tmp_value = os.environ.get("TMPDIR")
+if not tmp_value:
+    raise SystemExit("Set TMPDIR to an existing temporary directory")
+tmp = Path(tmp_value)
 for location in (root, tmp):
     state = os.statvfs(location)
     if state.f_bavail * state.f_frsize < 10 * 1024**3 + 128 * 1024**2 or state.f_favail < 1000:

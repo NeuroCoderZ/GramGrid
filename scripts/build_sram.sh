@@ -5,7 +5,10 @@ cd "$ROOT"
 python3 - <<'PY'
 import os
 from pathlib import Path
-for path in (Path.cwd(), Path(os.environ.get("TMPDIR", "/home/neurocoderz/.hermes/cache/scratch"))):
+tmp_value = os.environ.get("TMPDIR")
+if not tmp_value:
+    raise SystemExit("Set TMPDIR to an existing temporary directory")
+for path in (Path.cwd(), Path(tmp_value)):
     state = os.statvfs(path)
     if state.f_bavail * state.f_frsize < 10 * 1024**3 + 128 * 1024**2 or state.f_favail < 1000:
         raise SystemExit("Insufficient storage reserve")
